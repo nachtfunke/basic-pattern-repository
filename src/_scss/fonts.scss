@@ -1,0 +1,9 @@
+/* Work Sans variable font */
+@font-face {
+    font-family: "Work Sans";
+    src: url('../assets/fonts/work-sans-subset.woff2') format('woff2'),
+         url('../assets/fonts/work-sans-subset.zopfli.woff') format('woff'),
+         url('../assets/fonts/work-sans-subset.ttf') format('ttf');
+    font-display: swap;
+    font-weight: 100 1000;
+}

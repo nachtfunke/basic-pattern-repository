@@ -1,0 +1,1 @@
+cd ./src/assets/fonts && glyphhanger https://google.com --LATIN --subset="*.ttf"

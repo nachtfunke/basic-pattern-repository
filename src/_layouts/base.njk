@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Thomas Michael Semmler">
+        <meta name="viewport" content="width=device-width">
+        <title>{{ title + '-' + meta.site.title if title else meta.site.title }}</title>
+        <link rel="stylesheet" href="{ '/css/fonts.css' | url }" media="print" onload="this.media='screen'">
+        <link rel="stylesheet" href="{ '/css/style.css' | url }">
+        <noscript>
+            <link rel="stylesheet" href="{ '/css/fonts.css' | url }">
+        </noscript>
+    </head>
+</html>

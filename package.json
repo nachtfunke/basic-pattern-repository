@@ -1,0 +1,28 @@
+{
+  "name": "basic-pattern-repository",
+  "version": "0.1.0",
+  "description": "",
+  "author": "Thomas Michael Semmler",
+  "main": ".eleventy.js",
+  "scripts": {
+    "eleventy:serve": "eleventy --serve",
+    "eleventy:build": "eleventy",
+    "eleventy:test": "eleventy --dryrun",
+    "sass:watch": "sass src/_scss:dist/css --watch --update --color",
+    "sass:build": "sass src/_scss:dist/css --no-source-map --style=compressed",
+    "subset-font": "./build_tasks/subset-font.sh",
+    "clean": "del dist",
+    "start": "run-p -l clean sass:build sass:watch eleventy:serve",
+    "build": "run-s -l clean eleventy:build sass:build",
+    "test": "npm run eleventy:test"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^0.12.1",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.6",
+    "del": "^2.2.2",
+    "del-cli": "^3.0.1",
+    "eleventy-plugin-svg-contents": "^0.7.0",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.34.0"
+  }
+}
