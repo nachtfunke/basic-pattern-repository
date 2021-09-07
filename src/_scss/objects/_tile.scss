@@ -1,0 +1,13 @@
+@mixin mixin() {
+    background-color: #fff;
+    border-radius: 3px;
+    padding: clamp(.25em, 5%, .5em);
+    border: 2px solid var(--color-override, var(--color-primary));
+    transition-property: border-color;
+    transition-duration: var(--base-animation-duration);
+    transition-timing-function: var(--base-easing);
+}
+
+.tile {
+    @include mixin();
+}

@@ -1,0 +1,22 @@
+.menu {
+    list-style: none;
+    padding-inline-start: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .5em;
+
+    
+    &__item {
+        display: flex;
+        align-items: center;
+        
+        & + & {
+            &::before {
+                content: '-';
+                display: inline-block;
+                margin-inline-end: .5em;
+            }
+        }
+    }
+}

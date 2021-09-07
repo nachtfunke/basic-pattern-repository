@@ -1,0 +1,14 @@
+{%- macro logo(params) -%}
+<figure class="logo  {{ params.class if params.class }}">
+    <p class="logo__headline"><a href="{{ '/' | url }}">Basic Pattern Repository</a></p>
+    <figcaption class="logo__subheadline">just SVG - for your delight!</figcaption>
+    <ul class="logo__menu  menu">
+        {%- for key, item in params.menu -%}
+            <li class="menu__item">
+                {%- set isCurrent = params.page.url == ( item.url + '/' ) -%}
+                <a href="{{ item.url | url }}" {% if isCurrent %}aria-current="page"{% endif %} >{{ item.label }}{{ '↗' if item.external }}</a>
+            </li>
+        {%- endfor -%}
+    </ul>
+</figure>
+{%- endmacro -%}

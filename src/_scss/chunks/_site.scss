@@ -1,0 +1,310 @@
+@use '../tools/' as *;
+@use '../objects/sr-only' as sr-only;
+
+@mixin widerThanLayoutBreak() {
+    @include widerThan(layout) {
+        @media (orientation: landscape) {
+            @content;
+        }
+    }
+}
+
+@mixin narrowerThanLayoutBreak() {
+    @include narrowerThan(layout) {
+        @media (orientation: portrait) {
+            @content;
+        }
+    }
+}
+
+@mixin _contentBackground() {
+    background-color: #fff;
+    border-radius: 1.5em;
+    box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+.site {
+    $p: &;
+    @include widerThanLayoutBreak() {
+        height: 100%;
+        display: grid;
+        gap: var(--site-padding);
+        grid-template-columns: [side-start] 1fr [side-end patterns-start] minmax(auto, 42%) [patterns-end];
+        grid-template-rows: [skip] auto [skip-end header-start] 1fr [header-end footer-start] auto [footer-end];
+        height: 100%;
+        overflow-y: hidden;
+    }
+
+    &__skip-to-content {
+        display: flex;
+        justify-content: center;
+        line-height: 3;
+        background-color: hsl(var(--color-hs-accent) 50% / .5);
+        text-transform: uppercase;
+        font-feature-settings: 'c2sc', 'smcp';
+        font-weight: 625;
+        
+        &:focus {
+            color: var(--color-highlight);
+            text-decoration-color: currentColor;
+        }
+        
+        &:not(:where(:active, :focus, :focus-within)) {
+            @include sr-only.mixin();
+        }
+    }
+
+    &__header {
+        padding: var(--site-padding);
+        padding-block-end: 0;
+
+        @include widerThanLayoutBreak() {
+            grid-column: side-start / side-end;
+            grid-row: header-start / header-end;
+            display: flex;
+            flex-direction: column;
+            place-content: center;
+            height: 100%;
+        }
+    }
+
+    &__content {
+        @include _contentBackground();
+        padding: var(--site-padding);
+        transition-property: transform, opacity;
+        transition-duration: var(--base-animation-duration);
+        transition-timing-function: var(--base-easing);
+
+        :where(a[target]) {
+            &::after {
+                content: '↗';
+            }
+        }
+    }
+
+    &__browse-button {
+        margin-block-end: 1em;
+    }
+
+    &__patterns {
+        padding-inline: var(--site-padding);
+        position: relative;
+        padding-block-end: var(--site-padding);
+        perspective: 700px;
+
+        @include widerThanLayoutBreak() {
+            padding-block-end: 0;
+            margin-block-start: 0;
+        }
+
+        &::after {
+            @include _contentBackground();
+            content: '';
+            position: absolute;
+            height: calc(100% - 12vh);
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: -1;
+
+            @include widerThanLayoutBreak() {
+                content: none;
+            }
+        }
+
+        @include widerThanLayoutBreak() {
+            grid-column: patterns-start / patterns-end;
+            grid-row: header-start / footer-end;
+            padding-inline: 0;
+            height: 100%;
+            overflow-y: auto;
+        }
+    }
+
+    &__footer {
+        padding: var(--site-padding);
+
+        @include widerThanLayoutBreak() {
+            grid-column: side-start / side-end;
+            grid-row: footer-start / footer-end;
+        }
+    }
+
+    &.vers--page {
+        display: flex;
+        flex-direction: column;
+
+        @include widerThanLayoutBreak() {
+            display: grid;
+            gap: 0;
+        }
+
+        #{$p} {
+            &__header {
+                padding: var(--site-padding);
+            }
+            
+            &__content {
+                position: relative;
+                flex: 1;
+
+                :where(h1, h2, h3, h5, h6) {
+                    line-height: 1.25;
+                    margin-block-end: 1em;
+                    
+                    &:not(:first-child) {
+                        margin-top: 1.5em;
+                    }
+                }
+
+                :where(p, li) {
+                    line-height: 1.5;
+                    font-weight: 425;
+                    font-size: .85em;
+
+                    @include widerThan(pattern) {
+                        font-size: 1em;
+                    }
+                }
+
+                :where(p + p) {
+                    margin-block-start: 1em;
+                }
+
+                :where(ul, ol, dl) {
+                    &:not(:first-child) {
+                        margin-block-start: 1em;
+                    }
+                }
+
+                @include narrowerThan(layout) {
+                    border-end-end-radius: 0;
+                    border-end-start-radius: 0;
+                }
+
+                @include widerThanLayoutBreak() {
+                    grid-column: patterns-start / patterns-end;
+                    grid-row: header-start / footer-end;
+                    z-index: 1;
+                    height: 100%;
+                    overflow-y: auto;
+                    padding: calc(var(--site-padding) * 2);
+
+                }
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    display: block;
+                    inset-block-end: -2px;
+                    inset-inline: 0;
+                    height: 2px;
+                    background-color: #fff;
+
+                    @include widerThanLayoutBreak() {
+                        content: none;
+                    }
+                }
+            }
+
+            &__footer {
+                background-color: #fff;
+
+                @include widerThanLayoutBreak() {
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+    &.vers--single-pattern {
+        display: flex;
+        flex-direction: column;
+
+        @include widerThanLayoutBreak() {
+            display: grid;
+            gap: 0;
+        }
+
+        #{$p} {
+            &__header {
+                padding: var(--site-padding);
+            }
+            &__patterns {
+                display: none;
+
+                @include widerThanLayoutBreak() {
+                    display: block;
+                }
+            }
+
+            &__content {
+                border-end-end-radius: 0;
+                border-end-start-radius: 0;
+                position: relative;
+                flex: 1;
+
+                @include widerThanLayoutBreak() {
+                    grid-column: patterns-start / patterns-end;
+                    grid-row: header-start / footer-end;
+                    box-shadow: none;
+                    border-radius: none;
+                    background-color: transparent;
+                    z-index: 1;
+                    height: 100%;
+                    overflow-y: auto;
+                    padding: calc(var(--site-padding) * 2);
+
+                }
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    display: block;
+                    inset-block-end: -2px;
+                    inset-inline: 0;
+                    height: 2px;
+                    background-color: #fff;
+
+                    @include widerThanLayoutBreak() {
+                        content: none;
+                    }
+                }
+            }
+
+            &__footer {
+                background-color: #fff;
+
+                @include widerThanLayoutBreak() {
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+    &.is--showing-pattern-details {
+        .pattern-list {
+            @include widerThanLayoutBreak() {
+                transform: translateZ(-100px);
+                opacity: .5;
+                filter: blur(10px);
+            }
+        }
+
+        #{$p} {
+            &__patterns {
+            }
+            &__content {
+            }
+        }
+    }
+
+    &.is--showing-patterns-navigation {
+        #{$p} {
+            &__content {
+                transform: translateY(25%);
+                opacity: 0;
+            }
+        }
+    }
+}

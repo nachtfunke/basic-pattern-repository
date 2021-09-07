@@ -1,0 +1,107 @@
+@use '../tools/' as *;
+@use '../objects/tile' as tile;
+@use '../objects/card' as card;
+@use 'site' as *;
+
+.pattern-entry {
+    display: flex;
+    flex-direction: column;
+    gap: var(--site-padding);
+    max-width: 640px;
+    margin: 0 auto;
+
+    @include widerThanLayoutBreak() {
+        @include tile.mixin();
+        @include card.mixin();
+        padding: var(--site-padding);
+        border-radius: inherit;
+        border-end-start-radius: 1.5em;
+        border-end-end-radius: 1.5em;
+    }
+
+    &__pattern {
+        display: flex;
+        flex-direction: column;
+        gap: var(--site-padding);
+
+        @include widerThanLayoutBreak() {
+            flex-direction: column;
+            gap: calc(var(--site-padding) / 2);
+        }
+
+        & > .pattern {
+            margin-block-end: 0;
+
+            @include widerThanLayoutBreak() {
+                width: 100%;
+            }
+        }
+
+        &-caption {
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--site-padding) / 2);
+        }
+    }
+
+    &__title {
+        line-height: 1;
+        font-size: 1.5em;
+
+        @include widerThan(pattern) {
+            font-size: 1.75em;
+        }
+
+        @include widerThanLayoutBreak() {
+            font-size: 2em;
+        }
+    }
+
+    &__category-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5em;
+    }
+
+    &__code {
+        overflow: auto;
+        font-size: .7em;
+        border-radius: 5px;
+        overflow: hidden;
+
+        @include widerThanLayoutBreak() {
+            font-size: .85em;
+        } 
+
+        & > pre {
+            margin: 0 !important;
+            padding: clamp(1em, 3vw, 2em) !important;
+        }
+    }
+
+    &__copy-button {
+        margin-inline-start: auto;
+    }
+
+    &__text {
+
+    }
+
+    &__prev-next {
+        display: flex;
+        gap: var(--site-padding);
+
+        & > * {
+            flex: 50%;
+            max-width: 50%;
+
+            &:last-of-type {
+                text-align: end;
+                margin-inline-start: auto;
+            }
+        }
+    }
+}

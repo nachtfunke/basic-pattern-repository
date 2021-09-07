@@ -1,0 +1,19 @@
+@use '../tools/' as *;
+
+.prev-next {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+
+    &__label {
+        font-size: .85em;
+        text-transform: uppercase;
+        font-feature-settings: "c2sc", "smcp";
+        font-weight: 775;
+        white-space: nowrap;
+
+        @include widerThan(pattern) {
+            font-size: 1em;
+        }
+    }
+}

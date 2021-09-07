@@ -1,0 +1,5 @@
+@use '../functions/breakpoint' as *;
+
+@mixin widerThan($_breakpointName) {
+    @media screen and (min-width: breakpoint($_breakpointName)) { @content; }
+}

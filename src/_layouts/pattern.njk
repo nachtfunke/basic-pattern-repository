@@ -1,0 +1,74 @@
+---
+layout: pattern-pages
+bodyClass: 'vers--single-pattern  is--showing-pattern-details'
+logoClass: 'compact'
+highlightSyntax: true
+---
+{%- set previousPattern = collections.orderedPatterns | getPreviousCollectionItem(page) -%}
+{%- set nextPattern = collections.orderedPatterns | getNextCollectionItem(page) -%}
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="0" height="0" style="contain: strict; position: absolute;">
+    <defs>
+        {{ content | safe }}
+        {{ previousPattern.templateContent | safe }}
+        {{ nextPattern.templateContent | safe }}
+    </defs>
+</svg>
+<noscript>
+    <a class="button  site__browse-button" href="{{ '/' | url }}"><span aria-hidden="true">←</span> Browse Patterns</a>
+</noscript>
+<button class="button  site__browse-button" type="button" data-close-pattern-details><span aria-hidden="true">←</span> Browse Patterns</button>
+<article class="pattern-entry">
+    <figure class="pattern-entry__pattern">
+        <div class="pattern vers--rect" aria-hidden="true" data-pattern-item>
+            <svg class="pattern__svg" width="252" height="61" viewbox="0 0 252 61" data-pattern-svg>
+                <rect width="252" height="61" fill="url(#pattern-{{ id }})" data-pattern-shape />
+            </svg>
+        </div>
+        <figcaption class="pattern-entry__pattern-caption">
+            <h1 class="pattern-entry__title">Pattern #{{ id }}</h1>
+            <ul class="pattern-entry__category-list" role="list">
+                {%- for category in categories -%}
+                    <li class="category  pattern-entry__category-list-item">#{{ category }}</li>
+                {%- endfor -%}
+            </ul>
+            {%- if source -%}
+                <small>Original source by <cite><a href="{{ source.cite }}" target="_blank" rel="nofollow noopener">{{ source.person }}</a></cite>.</small>
+            {%- endif -%}
+            <p>Add this code to your <code>&lt;defs&gt;</code> in your document, to make the pattern available.</p>
+            <div class="pattern-entry__code" data-pattern-code>
+                {%- highlight "svg" -%}
+                    {{ content | safe }}
+                {%- endhighlight -%}
+            </div>
+            <button class="button  pattern-entry__copy-button" type="button" data-copy-pattern-code>copy code</button>
+        </figcaption>
+    </figure>
+    <nav class="pattern-entry__prev-next">
+        {% if previousPattern %}
+            <div class="prev-next">
+                <p class="prev-next__label" aria-hidden="true">previous pattern</p>
+                <div class="pattern vers--rect  prev-next__item" data-pattern-item>
+                    <svg class="pattern__svg" width="107" height="27" viewbox="0 0 107 27" aria-hidden="true" data-pattern-svg>
+                        <rect width="107" height="27" fill="url(#pattern-{{ previousPattern.data.id }})" data-pattern-shape />
+                    </svg>
+                    <a class="pattern__link" href="{{ previousPattern.url }}">
+                        <span class="text">previous pattern</span>
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+        {% if nextPattern %}
+            <div class="prev-next">
+                <p class="prev-next__label" aria-hidden="true">next pattern</p>
+                <div class="pattern vers--rect  prev-next__item" data-pattern-item>
+                    <svg class="pattern__svg" width="107" height="27" viewbox="0 0 107 27" aria-hidden="true" data-pattern-svg>
+                        <rect width="107" height="27" fill="url(#pattern-{{ nextPattern.data.id }})" data-pattern-shape />
+                    </svg>
+                    <a class="pattern__link" href="{{ nextPattern.url }}">
+                        <span class="text">next pattern</span>
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </nav>
+</article>

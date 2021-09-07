@@ -1,0 +1,11 @@
+.category {
+    font-size: .9em;
+    font-weight: 600;
+    font-feature-settings: "c2sc", "smcp";
+    background-color: var(--color-accent);
+    border-radius: 2px;
+    line-height: 1;
+    padding: .2em .3em;
+    display: inline-flex;
+    align-items: center;
+}

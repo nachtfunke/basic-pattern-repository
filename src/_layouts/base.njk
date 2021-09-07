@@ -1,3 +1,4 @@
+{% from 'partials/logo.macro.njk' import logo %}
 <!doctype html>
 <html lang="en">
     <head>
@@ -5,10 +6,35 @@
         <meta name="author" content="Thomas Michael Semmler">
         <meta name="viewport" content="width=device-width">
         <title>{{ title + '-' + meta.site.title if title else meta.site.title }}</title>
-        <link rel="stylesheet" href="{ '/css/fonts.css' | url }" media="print" onload="this.media='screen'">
-        <link rel="stylesheet" href="{ '/css/style.css' | url }">
+        {% if source %}
+            <link rel="canonical" href="{{ source.cite }}">
+        {% endif %}
+        {% if highlightSyntax %}
+            <link rel="stylesheet" href="{{ '/css/syntax-highlight.css' | url }}">
+        {% else %}
+            <link rel="prefetch" href="{{ '/css/syntax-highlight.css' | url }}">
+        {% endif %}
+        <link rel="stylesheet" href="{{ '/css/fonts.css' | url }}" media="print" onload="this.media='screen'">
+        <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
         <noscript>
-            <link rel="stylesheet" href="{ '/css/fonts.css' | url }">
+            <link rel="stylesheet" href="{{ '/css/fonts.css' | url }}">
         </noscript>
     </head>
+    <body class="site {{ bodyClass if bodyClass }}">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="0" height="0" style="contain: strict; position: absolute;">
+            <defs>
+                <symbol id="icon-arrow-down" viewBox="0 0 14 16">
+                    <path d="M7 1.00025L7 14.9997M7 14.9997L13 8.99972M7 14.9997L1 8.99972" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--icon-color, currentcolor)"/>
+                </symbol>
+            </defs>
+        </svg>
+        <a class="site__skip-to-content" href="#content">skip to content</a>
+        <header class="site__header">
+            {{ logo({ class: logoClass, menu: navigation, page: page }) }}
+        </header>
+        {{ content | safe }}
+        <footer class="site__footer  footer">
+            <small><a href="https://helloyes.dev"  target="_blank" rel="noopener nofollow">{{ meta.site.copyright }}</a></small>
+        </footer>
+    </body>
 </html>

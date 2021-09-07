@@ -1,0 +1,43 @@
+---
+layout: page
+permalink: 'credits/index.html'
+templateEngineOverride: njk,md
+---
+
+# Credits
+
+This page is intended to give credit other people's contributions that made this website possible.
+
+## Figma Library
+
+This idea started when I discovered a downloadable figma file on [github](https://github.com/skumando/figma-patterns) by [Chris Orebaugh](http://www.chrisorebaugh.com/). , containing lots of patterns intended to be used as background-images. I published them as a [Figma Library](https://www.figma.com/community/file/978689698060140147) to the community. I needed them on my own project but I quickly realized that I would need them to be not-background-images in my document, so I could easily [change their colors with custom properties](https://helloyes.dev/blog/2021/very-simple-patterns-with-svg/).
+
+I eventually started to hand-code them. This website serves as a vault, a respository for these patterns, so I can easily copy and paste them into my projects.
+
+## Pattern Credits
+
+Some of the Patterns in the repository are based on someone elses work. I am trying to make this as transparent as possible. At the time being, these are the names of the people who's code I've included into the repository:
+
+<dl>
+{% for person, patterns in collections.orderedPatterns | groupby('data.source.person') %}
+    {% if person != 'undefined' %}
+        <dt><h3>{{ person }}</h3></dt>
+        <dd>
+            <p>Patterns:</p>
+            <ul>
+                {% for pattern in patterns %}
+                    <li><a href="{{ pattern.url | url }}">Pattern #{{ pattern.data.id }}</a> - found <a href="{{ pattern.data.source.cite }}" target="_blank" rel="noopener nofollow">here</a>.</li>
+                {% endfor %}
+            </ul>
+        </dd>
+    {% endif %}
+{% endfor %}
+</dl>
+
+***
+
+This is not an attempt to define me or someone else as a source of truth for very simple SVG Code. Instead it tries to keep it as transparent as possible, naming those who contributed, even if just tangentially.
+
+## Tech Credits
+
+This site is made with Eleventy - credit goes out to the people at the Eleventy community Discord for technical support, as well as the Frontend Horse Discord for general community support. CSS is [preprocessed by SASS](https://helloyes.dev/blog/2021/minimal-sass-and-eleventy-setup/), using the BIOS (BEM + ITCSS + OOCSS + SMACSS) Methodology. The font was subset with glyphhanger.

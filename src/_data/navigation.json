@@ -1,0 +1,24 @@
+{
+    "credits": {
+        "label": "Credits",
+        "url": "/credits"
+    },
+    "github": {
+        "label": "GitHub",
+        "url": "https://github.com/nachtfunke/basic-pattern-repository",
+        "external": true
+    },
+    "figma": {
+        "label": "Figma Library",
+        "url": "https://www.figma.com/community/file/978689698060140147/Basic-Patterns-for-backgrounds",
+        "external": true
+    },
+    "legal": {
+        "label": "Imprint",
+        "url": "/legal"
+    },
+    "updates": {
+        "label": "Updates",
+        "url": "/updates"
+    }
+}

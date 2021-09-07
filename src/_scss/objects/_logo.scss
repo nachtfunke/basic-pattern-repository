@@ -1,0 +1,70 @@
+@use '../tools/' as *;
+
+.logo {
+    $p: &;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-block: clamp(var(--base-spacing), 10vh, var(--base-spacing) * 3);
+    line-height: 1;
+
+    &__headline {
+        font-weight: 775;
+        margin-block-end: max(.3em, 10px);
+        font-size: clamp(2em, 3.5vmax, 4em);
+        color: var(--color-primary);
+        text-decoration: none;
+        text-align: center;
+        max-width: 19ch;
+        align-self: center;
+
+        > a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+    }
+
+    &__subheadline {
+        font-size: 1em;
+        font-weight: 475;
+
+        @include widerThan(layout) {
+            font-size: 1.5em;
+        }
+    }
+
+    &__menu {
+        font-size: .875em;
+        margin-block-start: 2em;
+        font-weight: 675;
+    }
+
+    &.compact {
+        @include narrowerThan(layout) {
+            @media (orientation: portrait) {
+                margin-block: 0;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                column-gap: 1em;
+                text-align: left;
+
+                #{$p} {
+                    &__headline {
+                        text-align: inherit;
+                        font-size: 1.5em;
+                    }
+
+                    &__subheadline {
+                        font-size: .85em;
+                    }
+                    &__menu {
+                        grid-column: 2 / -1;;
+                        grid-row: 1 / 2;
+                        margin: 0;
+                        justify-content: flex-end;
+                    }
+                }
+            }
+        }
+    }
+}

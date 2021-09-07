@@ -1,0 +1,23 @@
+---
+layout: page
+permalink: 'updates/index.html'
+templateEngineOverride: njk,md
+---
+
+# Updates
+
+As I update this repository, updates that are not content (meaning, new patterns) but instead changes to the site itself are listed here.
+
+<ol class="updates-list" role="list">
+    {%- for update in collections.update | reverse -%}
+        <li class="updates-list__item">
+            <article class="update" id="#{{ update.data.title | slug }}}">
+                <header class="update__header">
+                    <h2 class="update__version">{{ update.data.title }}</h2>
+                    <time class="update__date">{{ update.date | dateReadable }}</time>
+                </header>
+                <div class="update__content">{{ update.templateContent | safe }}</div>
+            </article>
+        </li>
+    {%- endfor -%}
+</ol>

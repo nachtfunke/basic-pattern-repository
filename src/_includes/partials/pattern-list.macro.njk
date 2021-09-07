@@ -1,0 +1,51 @@
+{%- macro patternList(params) -%}
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="0" height="0" style="contain: strict; position: absolute;">
+        <defs>
+            {%- for pattern in params.patterns -%}
+                {{ pattern.templateContent | safe }}
+            {%- endfor -%}
+        </defs>
+    </svg>
+    <ul class="pattern-list" role="list">
+    {%- for pattern in params.patterns -%}
+        <li class="pattern-list__item  pattern" id="pattern-{{ pattern.data.id }}" data-pattern-item {{ 'aria-current=page' if params.url == pattern.url }}>
+            <svg class="pattern__svg" viewbox="0 0 68 68" data-pattern-svg>
+                <rect width="68" height="68" fill="url(#pattern-{{ pattern.data.id }})" data-pattern-shape />
+            </svg>
+            <a class="pattern__link" href="{{ pattern.url | url }}">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down" />
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern {{ pattern.data.id }}</span>
+            </a>
+        </li>
+    {%- endfor -%}
+    </ul>
+    <script>
+        const patternEntries = document.querySelectorAll('[data-pattern-item]');
+
+        const recalculatePattern = _entry => {
+            const svg = _entry.querySelector('[data-pattern-svg]');
+            const shape = svg.querySelector('[data-pattern-shape]');
+            const width = _entry.offsetWidth;
+            const height = _entry.offsetHeight;
+            const padding = parseInt(window.getComputedStyle(_entry, null).getPropertyValue('padding'));
+            const border = parseInt(window.getComputedStyle(_entry, null).getPropertyValue('border'));
+            const newWidth = width - (border * 2) - (padding * 2);
+            const newHeight = height - (border * 2) - (padding * 2);
+            const ratio = width / height;
+            svg.setAttribute('viewBox', `0 0 ${newWidth} ${newHeight}`);
+            svg.setAttribute('width', newWidth);
+            svg.setAttribute('height', newHeight);
+            shape.setAttribute('width', newWidth);
+            shape.setAttribute('height', newHeight);
+        };
+
+        const resizePatterns = () => patternEntries.forEach( entry => (entry.offsetParent === null) ? null:recalculatePattern(entry) );
+
+        document.addEventListener('DOMContentLoaded', () => resizePatterns());
+        window.addEventListener('resize', resizePatterns);
+    </script>
+{%- endmacro -%}

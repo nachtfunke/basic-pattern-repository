@@ -1,0 +1,86 @@
+@use '../tools/' as *;
+@use 'tile' as tile;
+@use 'card' as card;
+@use 'sr-only' as srOnly;
+@use '../chunks/site' as *;
+
+.pattern {
+    @include tile.mixin();
+    @include card.mixin();
+    aspect-ratio: 1 / 1;
+    position: relative;
+    display: flex;
+
+    &__svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__link {
+        display: block;
+        text-align: center;
+        font-size: .75em;
+        font-weight: 500;
+
+        @media (hover: none) {
+            @include card.mixin();
+            @include tile.mixin();
+            position: absolute;
+            inset-block-end: 1em;
+            inset-inline-end: 1em;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: var(--color-accent);
+            mix-blend-mode: darken;
+            width: 0;
+            opacity: 0;
+            transition-property: width, opacity;
+            transition-duration: var(--base-animation-duration), calc(var(--base-animation-duration)/2.5);
+            transition-timing-function: var(--base-easing), linear;
+            transition-delay: 0ms, calc(var(--base-animation-duration)/2.5);
+
+            @include widerThanLayoutBreak() {
+                background-color: hsl(var(--color-hs-accent) 66%);
+            }
+        }
+
+        @media (hover: hover) {
+            &:is(:hover,:focus)::after {
+                width: 100%;
+                opacity: 1;
+            }
+
+            > :where(.icon, .text) {
+                @include srOnly.mixin();
+            }
+        }
+
+        > .icon {
+            svg {
+                display: block;
+                width: 1em;
+                height: auto;
+                transform: rotate(-90deg);
+            }
+        }
+
+        > .text {
+            line-height: 2;
+        }
+    }
+
+    &.vers--rect {
+        aspect-ratio: 831 / 203;
+    }
+}

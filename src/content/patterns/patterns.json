@@ -1,0 +1,6 @@
+{
+    "layout": "pattern",
+    "tags": ["pattern"],
+    "permalink": "pattern/{{ id }}/index.html",
+    "channels": 1
+}

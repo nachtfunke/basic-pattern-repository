@@ -1,1 +1,1 @@
-cd ./src/assets/fonts && glyphhanger https://google.com --LATIN --subset="*.ttf"
+cd ./src/assets/fonts && glyphhanger https://google.com --LATIN --whitelist="↗©" --subset="*.ttf"

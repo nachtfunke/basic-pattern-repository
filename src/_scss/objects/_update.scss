@@ -1,0 +1,22 @@
+.update {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__version {
+        margin: 0;
+        margin-block-end: 0 !important;
+    }
+
+    &__content {
+        :where(ul, ol, dl) {
+            padding-inline-start: 2em;
+        }
+    }
+}

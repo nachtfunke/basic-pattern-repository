@@ -1,0 +1,47 @@
+@use '../chunks/site' as site;
+
+:root {
+    // accent-color
+    --color-hs-sandwisp: 58 83%;
+    --color-hs-accent: var(--color-hs-sandwisp);
+    --color-accent: hsl(var(--color-hs-accent) 77%);
+    // primary color
+    --color-hs-woodybrown: 345 19%;
+    --color-hs-primary: var(--color-hs-woodybrown);
+    --color-primary: hsl(var(--color-hs-primary) 25%);
+    // highlight color
+    --color-hs-blue-marguerite: 233 44%;
+    --color-hs-highlight: var(--color-hs-blue-marguerite);
+    --color-highlight: hsl(var(--color-hs-highlight) 41%);
+    // Spacings
+    --base-spacing: 1.5em;
+    --base-padding: 1em;
+    // Base Settings
+    --base-easing: cubic-bezier(0.85, 0, 0.15, 1);
+    --base-animation-duration: 1ms;
+
+    @media (prefers-reduced-motion: no-preference) {
+        --base-animation-duration: 300ms;
+    }
+
+    @include site.widerThanLayoutBreak() {
+        height: 100%;
+    }
+}
+
+body {
+    --site-padding: clamp(var(--base-spacing), 3vmax, var(--base-spacing) * 3.33);
+    background-color: var(--color-accent);
+    font-family: "Work Sans", system-ui, sans-serif;
+    color: var(--color-primary);
+}
+
+a {
+    color: var(--color-highlight);
+    text-decoration-thickness: .15em;
+
+    &:is(:hover,:focus,[aria-current]) {
+        color: hsl(var(--color-hs-highlight) 15%);
+        text-decoration-color: hsl(var(--color-hs-accent) 50%);
+    }
+}

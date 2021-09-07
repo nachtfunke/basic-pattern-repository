@@ -1,0 +1,9 @@
+@use '../../settings/breakpoints' as *;
+
+@function breakpoint($_breakpointName) {
+    @if (map-has-key($map: $breakpoints, $key: $_breakpointName)) {
+        @return map-get($map: $breakpoints, $key: $_breakpointName);
+    } @else {
+        @error "[fn] breakpoint: The breakpoint '#{$_breakpointName}' does not exist in $breakpoints!";
+    }
+}
