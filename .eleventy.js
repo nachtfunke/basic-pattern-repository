@@ -10,7 +10,7 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.setTemplateFormats('md,njk');
 
     eleventyConfig.setBrowserSyncConfig({
-        files: './dist/css/**/*.css',
+        files: ['./dist/css/**/*.css', './dist/assets/js/*/**.js'],
         browser: 'polypane'
     });
 
@@ -25,6 +25,7 @@ module.exports = function(eleventyConfig) {
     });
     
     eleventyConfig.addPassthroughCopy('src/assets/fonts/*-subset.*');
+    eleventyConfig.addPassthroughCopy('src/assets/js');
 
     return {
         dir: {
