@@ -1,0 +1,18 @@
+---
+permalink: '/api/patterns.json'
+---
+[
+    {% for pattern in collections.pattern %}
+        {
+            "id": {{ pattern.data.id }},
+            "url": "https://patterns.helloyes.dev{{ pattern.url | url }}",
+            "categories": "{{ pattern.data.categories }}",
+            "svg": "https://patterns.helloyes.dev/svg/pattern-{{ pattern.data.id }}.svg",
+            "source": {
+                "person": "{{ pattern.data.source.person or 'Basic Pattern Repository' }}",
+                "url": "{{ pattern.data.source.cite or 'https://patterns.helloyes.dev' }}"
+            }
+        }
+    {% if loop.last == false %},{% endif %}
+    {% endfor %}
+]

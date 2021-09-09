@@ -34,10 +34,15 @@
         }
     }
 
+    &__menu-button {
+        display: none;
+    }
+
     &__menu {
         font-size: .875em;
         margin-block-start: 2em;
         font-weight: 675;
+        display: block;
     }
 
     &.compact {
@@ -45,9 +50,10 @@
             @media (orientation: portrait) {
                 margin-block: 0;
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr auto;
                 column-gap: 1em;
                 text-align: left;
+                align-items: center;
 
                 #{$p} {
                     &__headline {
@@ -57,12 +63,31 @@
 
                     &__subheadline {
                         font-size: .85em;
+                        grid-row: 2;
+                        line-height: 1.25;
                     }
+
+                    &__menu-button {
+                        display: inline-flex !important;
+
+                        @include widerThan(pattern) {
+                            display: none;
+                        }
+                    }
+                    
                     &__menu {
                         grid-column: 2 / -1;;
                         grid-row: 1 / 2;
                         margin: 0;
                         justify-content: flex-end;
+                        
+                        &[hidden] {
+                            display: none;
+                        }
+                        
+                        @include widerThan(pattern) {
+                            display: flex;
+                        }
                     }
                 }
             }

@@ -1,11 +1,4 @@
 {%- macro patternList(params) -%}
-    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="0" height="0" style="contain: strict; position: absolute;">
-        <defs>
-            {%- for pattern in params.patterns -%}
-                {{ pattern.templateContent | safe }}
-            {%- endfor -%}
-        </defs>
-    </svg>
     <ul class="pattern-list" role="list">
     {%- for pattern in params.patterns -%}
         <li class="pattern-list__item  pattern" id="pattern-{{ pattern.data.id }}" data-pattern-item {{ 'aria-current=page' if params.url == pattern.url }}>

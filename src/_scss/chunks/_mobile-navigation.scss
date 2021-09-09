@@ -1,0 +1,56 @@
+@use '../objects/tile' as tile;
+@use '../objects/card' as card;
+@use 'site' as site;
+
+.mobile-navigation {
+    $p: &;
+
+    &__close-button {
+        display: none;
+    }
+    
+    &:not([hidden]) {
+        @include site.narrowerThanLayoutBreak() {
+            position: fixed;
+            inset-block-start: 0;
+            inset-inline: 0;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: var(--site-padding);
+            align-items: center;
+            padding: calc(var(--site-padding) * 2) var(--site-padding);
+
+            &::before {
+                content: '';
+                position: absolute;
+                height: 100vh;
+                inset: 0;
+                z-index: -1;
+                backdrop-filter: blur(5px);
+                background-image: url('/svg/patterns.svg#view-pattern-20');
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                @include site.contentBackground();
+                border-start-start-radius: 0;
+                border-start-end-radius: 0;
+                border-end-start-radius: 1.5em;
+                border-end-end-radius: 1.5em;
+                z-index: -1;
+            }
+
+            #{$p} {
+                &__close-button {
+                    display: block;
+                }
+                &__menu {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
