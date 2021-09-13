@@ -22,7 +22,7 @@ const mobileNav = document.querySelector('[data-mobile-nav]');
 
 if (patternEntries) {
     // initial resizing.
-    document.addEventListener('DOMContentLoaded', () => resizePatterns());
+    document.addEventListener('DOMContentLoaded', resizePatterns());
 
     // resize when the window resizes too.
     window.addEventListener('resize', resizePatterns);
