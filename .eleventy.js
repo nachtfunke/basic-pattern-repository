@@ -1,5 +1,6 @@
 const svgContents = require('eleventy-plugin-svg-contents');
 const syntaxHighlighting = require('@11ty/eleventy-plugin-syntaxhighlight');
+const socialImages = require('@11tyrocks/eleventy-plugin-social-images');
 
 module.exports = function(eleventyConfig) {
     const markdownIt = require('markdown-it');
@@ -16,6 +17,7 @@ module.exports = function(eleventyConfig) {
 
     eleventyConfig.addPlugin(svgContents);
     eleventyConfig.addPlugin(syntaxHighlighting);
+    eleventyConfig.addPlugin(socialImages);
     
     eleventyConfig.addFilter('dateReadable', date => date.toLocaleDateString('de-de'));
 

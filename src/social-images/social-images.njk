@@ -1,0 +1,18 @@
+---
+permalink: './pages.json'
+permalinkBypassOutputDir: true
+eleventyExcludeFromColletions: true
+---
+[
+    {
+        "imgName": "default",
+        "title": "Basic Pattern Repository"
+    },
+    {%- for pattern in collections.pattern %}
+        {
+            "imgName": "pattern-{{ pattern.data.id }}",
+            "title": "Pattern #{{ pattern.data.id }}",
+            "patternId": "{{ pattern.data.id }}"
+        }{% if loop.last == false %},{% endif -%}
+    {% endfor %}
+]

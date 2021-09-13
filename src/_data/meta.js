@@ -1,7 +1,7 @@
-{
+module.exports = {
     "site": {
         "title": "Basic Pattern Repository",
         "copyright": "2021 Thomas Michael Semmler",
-        "domain": "https://patterns.helloyes.dev"
+        "domain": process.env.URL || "http://localhost:8080"
     }
 }

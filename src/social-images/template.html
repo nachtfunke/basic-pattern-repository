@@ -1,0 +1,1223 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Social Images</title>
+        <style>
+        @charset "UTF-8";
+/* Thank you, Andy Bell! https://github.com/andy-piccalilli/modern-css-reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+ul[role=list], ol[role=list] {
+  list-style: none;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+img, picture {
+  max-width: 100%;
+  display: block;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+
+.sr-only {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site {
+    height: 100%;
+    display: grid;
+    gap: var(--site-padding);
+    grid-template-columns: [side-start] 1fr [side-end patterns-start] minmax(auto, 42%) [patterns-end];
+    grid-template-rows: [skip] auto [skip-end header-start] 1fr [header-end footer-start] auto [footer-end];
+    height: 100%;
+    overflow-y: hidden;
+  }
+}
+.site__skip-to-content {
+  display: flex;
+  justify-content: center;
+  line-height: 3;
+  background-color: hsl(var(--color-hs-accent) 50%/0.5);
+  text-transform: uppercase;
+  font-feature-settings: "c2sc", "smcp";
+  font-weight: 625;
+}
+.site__skip-to-content:focus {
+  color: var(--color-highlight);
+  text-decoration-color: currentColor;
+}
+.site__skip-to-content:not(:where(:active, :focus, :focus-within)) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+.site__header {
+  padding: var(--site-padding);
+  padding-block-end: 0;
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site__header {
+    grid-column: side-start/side-end;
+    grid-row: header-start/header-end;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    height: 100%;
+  }
+}
+.site__content {
+  background-color: #fff;
+  border-radius: 1.5em;
+  box-shadow: 0 0 0 2px var(--color-primary);
+  padding: var(--site-padding);
+  transition-property: transform, opacity;
+  transition-duration: var(--base-animation-duration);
+  transition-timing-function: var(--base-easing);
+}
+.site__content :where(a[target])::after {
+  content: "↗";
+}
+.site__browse-button {
+  margin-block-end: 1em;
+}
+.site__patterns {
+  padding-inline: var(--site-padding);
+  position: relative;
+  padding-block-end: var(--site-padding);
+  perspective: 700px;
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site__patterns {
+    padding-block-end: 0;
+    margin-block-start: 0;
+  }
+}
+.site__patterns::after {
+  background-color: #fff;
+  border-radius: 1.5em;
+  box-shadow: 0 0 0 2px var(--color-primary);
+  content: "";
+  position: absolute;
+  height: calc(100% - 12vh);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site__patterns::after {
+    content: none;
+  }
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site__patterns {
+    grid-column: patterns-start/patterns-end;
+    grid-row: header-start/footer-end;
+    padding-inline: 0;
+    height: 100%;
+    overflow-y: auto;
+  }
+}
+.site__footer {
+  padding: var(--site-padding);
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site__footer {
+    grid-column: side-start/side-end;
+    grid-row: footer-start/footer-end;
+  }
+}
+.site.vers--page {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site.vers--page {
+    display: grid;
+    gap: 0;
+  }
+}
+.site.vers--page .site__header {
+  padding: var(--site-padding);
+}
+.site.vers--page .site__content {
+  position: relative;
+  flex: 1;
+}
+.site.vers--page .site__content :where(h1, h2, h3, h5, h6) {
+  line-height: 1.25;
+  margin-block-end: 1em;
+}
+.site.vers--page .site__content :where(h1, h2, h3, h5, h6):not(:first-child) {
+  margin-top: 1.5em;
+}
+.site.vers--page .site__content :where(p, li) {
+  line-height: 1.5;
+  font-weight: 425;
+  font-size: 0.85em;
+}
+@media screen and (min-width: 720px) {
+  .site.vers--page .site__content :where(p, li) {
+    font-size: 1em;
+  }
+}
+.site.vers--page .site__content :where(p + p) {
+  margin-block-start: 1em;
+}
+.site.vers--page .site__content :where(ul, ol, dl):not(:first-child) {
+  margin-block-start: 1em;
+}
+@media screen and (max-width: 1199px) {
+  .site.vers--page .site__content {
+    border-end-end-radius: 0;
+    border-end-start-radius: 0;
+  }
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site.vers--page .site__content {
+    grid-column: patterns-start/patterns-end;
+    grid-row: header-start/footer-end;
+    z-index: 1;
+    height: 100%;
+    overflow-y: auto;
+    padding: calc(var(--site-padding) * 2);
+  }
+}
+.site.vers--page .site__content::after {
+  content: "";
+  position: absolute;
+  display: block;
+  inset-block-end: -2px;
+  inset-inline: 0;
+  height: 2px;
+  background-color: #fff;
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site.vers--page .site__content::after {
+    content: none;
+  }
+}
+.site.vers--page .site__footer {
+  background-color: #fff;
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site.vers--page .site__footer {
+    background-color: transparent;
+  }
+}
+.site.vers--single-pattern {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site.vers--single-pattern {
+    display: grid;
+    gap: 0;
+  }
+}
+.site.vers--single-pattern .site__header {
+  padding: var(--site-padding);
+}
+.site.vers--single-pattern .site__patterns {
+  display: none;
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site.vers--single-pattern .site__patterns {
+    display: block;
+  }
+}
+.site.vers--single-pattern .site__content {
+  border-end-end-radius: 0;
+  border-end-start-radius: 0;
+  position: relative;
+  flex: 1;
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site.vers--single-pattern .site__content {
+    grid-column: patterns-start/patterns-end;
+    grid-row: header-start/footer-end;
+    box-shadow: none;
+    border-radius: none;
+    background-color: transparent;
+    z-index: 1;
+    height: 100%;
+    overflow-y: auto;
+    padding: calc(var(--site-padding) * 2);
+  }
+}
+.site.vers--single-pattern .site__content::after {
+  content: "";
+  position: absolute;
+  display: block;
+  inset-block-end: -2px;
+  inset-inline: 0;
+  height: 2px;
+  background-color: #fff;
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site.vers--single-pattern .site__content::after {
+    content: none;
+  }
+}
+.site.vers--single-pattern .site__footer {
+  background-color: #fff;
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site.vers--single-pattern .site__footer {
+    background-color: transparent;
+  }
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .site.is--showing-pattern-details .pattern-list {
+    transform: translateZ(-100px);
+    opacity: 0.5;
+    filter: blur(10px);
+  }
+}
+.site.is--showing-patterns-navigation .site__content {
+  transform: translateY(25%);
+  opacity: 0;
+}
+
+:root {
+  --color-hs-sandwisp: 58 83%;
+  --color-hs-accent: var(--color-hs-sandwisp);
+  --color-accent: hsl(var(--color-hs-accent) 77%);
+  --color-hs-woodybrown: 345 19%;
+  --color-hs-primary: var(--color-hs-woodybrown);
+  --color-primary: hsl(var(--color-hs-primary) 25%);
+  --color-hs-blue-marguerite: 233 44%;
+  --color-hs-highlight: var(--color-hs-blue-marguerite);
+  --color-highlight: hsl(var(--color-hs-highlight) 41%);
+  --base-spacing: 1.5em;
+  --base-padding: 1em;
+  --base-easing: cubic-bezier(0.85, 0, 0.15, 1);
+  --base-animation-duration: 1ms;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    --base-animation-duration: 300ms;
+  }
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  :root {
+    height: 100%;
+  }
+}
+
+body {
+  --site-padding: clamp(var(--base-spacing), 3vmax, var(--base-spacing) * 3.33);
+  background-color: var(--color-accent);
+  font-family: "Work Sans", system-ui, sans-serif;
+  color: var(--color-primary);
+}
+
+a {
+  color: var(--color-highlight);
+  text-decoration-thickness: 0.15em;
+}
+a:is(:hover, :focus, [aria-current]) {
+  color: hsl(var(--color-hs-highlight) 15%);
+  text-decoration-color: hsl(var(--color-hs-accent) 50%);
+}
+
+.tile {
+  background-color: #fff;
+  border-radius: 3px;
+  padding: clamp(.25em, 5%, .5em);
+  border: 2px solid var(--color-override, var(--color-primary));
+  transition-property: border-color;
+  transition-duration: var(--base-animation-duration);
+  transition-timing-function: var(--base-easing);
+}
+
+.card {
+  background-color: #fff;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.02), 0px 8px 25px rgba(0, 0, 0, 0.02);
+}
+
+.pattern {
+  background-color: #fff;
+  border-radius: 3px;
+  padding: clamp(.25em, 5%, .5em);
+  border: 2px solid var(--color-override, var(--color-primary));
+  transition-property: border-color;
+  transition-duration: var(--base-animation-duration);
+  transition-timing-function: var(--base-easing);
+  background-color: #fff;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.02), 0px 8px 25px rgba(0, 0, 0, 0.02);
+  aspect-ratio: 1/1;
+  position: relative;
+  display: flex;
+}
+.pattern__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pattern__link {
+  display: block;
+  text-align: center;
+  font-size: 0.75em;
+  font-weight: 500;
+}
+@media (hover: none) {
+  .pattern__link {
+    background-color: #fff;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.02), 0px 8px 25px rgba(0, 0, 0, 0.02);
+    background-color: #fff;
+    border-radius: 3px;
+    padding: clamp(.25em, 5%, .5em);
+    border: 2px solid var(--color-override, var(--color-primary));
+    transition-property: border-color;
+    transition-duration: var(--base-animation-duration);
+    transition-timing-function: var(--base-easing);
+    position: absolute;
+    inset-block-end: 1em;
+    inset-inline-end: 1em;
+  }
+}
+.pattern__link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.pattern__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-accent);
+  mix-blend-mode: darken;
+  width: 0;
+  opacity: 0;
+  transition-property: width, opacity;
+  transition-duration: var(--base-animation-duration), calc(var(--base-animation-duration)/2.5);
+  transition-timing-function: var(--base-easing), linear;
+  transition-delay: 0ms, calc(var(--base-animation-duration)/2.5);
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .pattern__link::after {
+    background-color: hsl(var(--color-hs-accent) 66%);
+  }
+}
+@media (hover: hover) {
+  .pattern__link:is(:hover, :focus)::after {
+    width: 100%;
+    opacity: 1;
+  }
+  .pattern__link > :where(.icon, .text) {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+}
+.pattern__link > .icon svg {
+  display: block;
+  width: 1em;
+  height: auto;
+  transform: rotate(-90deg);
+}
+.pattern__link > .text {
+  line-height: 2;
+}
+.pattern.vers--rect {
+  aspect-ratio: 831/203;
+}
+
+.button {
+  --inset-shadow-size: -3px;
+  font-family: var(--typeface-headings);
+  font-weight: 725;
+  color: var(--color-primary);
+  font-feature-settings: "c2sc", "smcp";
+  display: inline-flex;
+  border: 2px solid var(--color-primary);
+  border-radius: 4px;
+  padding: 0.5em 1em;
+  line-height: 1;
+  background-color: #fff;
+  box-shadow: inset 0px var(--inset-shadow-size) rgba(0, 0, 0, 0.15), 0px 1px 1px rgba(0, 0, 0, 0.25), 0px 1px 1px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.02), 0px 8px 25px rgba(0, 0, 0, 0.02);
+}
+.button:is(:hover, :focus) {
+  cursor: pointer;
+  color: var(--color-highlight);
+}
+.button:active {
+  --inset-shadow-size: 0;
+  transform: translateY(1px);
+}
+
+.category {
+  font-size: 0.9em;
+  font-weight: 600;
+  font-feature-settings: "c2sc", "smcp";
+  background-color: var(--color-accent);
+  border-radius: 2px;
+  line-height: 1;
+  padding: 0.2em 0.3em;
+  display: inline-flex;
+  align-items: center;
+}
+
+.prev-next {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.prev-next__label {
+  font-size: 0.85em;
+  text-transform: uppercase;
+  font-feature-settings: "c2sc", "smcp";
+  font-weight: 775;
+  white-space: nowrap;
+}
+@media screen and (min-width: 720px) {
+  .prev-next__label {
+    font-size: 1em;
+  }
+}
+
+.update {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.update__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.update__version {
+  margin: 0;
+  margin-block-end: 0 !important;
+}
+.update__content :where(ul, ol, dl) {
+  padding-inline-start: 2em;
+}
+
+.menu {
+  list-style: none;
+  padding-inline-start: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+.menu__item {
+  display: flex;
+  align-items: center;
+}
+.menu__item + .menu__item::before {
+  content: "-";
+  display: inline-block;
+  margin-inline-end: 0.5em;
+}
+
+.mobile-navigation__close-button {
+  display: none;
+}
+@media screen and (max-width: 1199px) and (orientation: portrait) {
+  .mobile-navigation:not([hidden]) {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: var(--site-padding);
+    align-items: center;
+    padding: calc(var(--site-padding) * 2) var(--site-padding);
+  }
+  .mobile-navigation:not([hidden])::before {
+    content: "";
+    position: absolute;
+    height: 100vh;
+    inset: 0;
+    z-index: -1;
+    backdrop-filter: blur(5px);
+    background-image: url("/svg/patterns.svg#view-pattern-20");
+  }
+  .mobile-navigation:not([hidden])::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #fff;
+    border-radius: 1.5em;
+    box-shadow: 0 0 0 2px var(--color-primary);
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+    border-end-start-radius: 1.5em;
+    border-end-end-radius: 1.5em;
+    z-index: -1;
+  }
+  .mobile-navigation:not([hidden]) .mobile-navigation__close-button {
+    display: block;
+  }
+  .mobile-navigation:not([hidden]) .mobile-navigation__menu {
+    margin: 0;
+  }
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-block: clamp(var(--base-spacing), 10vh, var(--base-spacing) * 3);
+  line-height: 1;
+}
+.logo__headline {
+  font-weight: 775;
+  margin-block-end: max(.3em, 10px);
+  font-size: clamp(2em, 3.5vmax, 4em);
+  color: var(--color-primary);
+  text-decoration: none;
+  text-align: center;
+  max-width: 19ch;
+  align-self: center;
+  white-space: pre;
+}
+.logo__headline > a {
+  color: inherit;
+  text-decoration: inherit;
+}
+.logo__subheadline {
+  font-size: 1em;
+  font-weight: 475;
+}
+@media screen and (min-width: 1200px) {
+  .logo__subheadline {
+    font-size: 1.5em;
+  }
+}
+.logo__menu-button {
+  display: none;
+}
+.logo__menu {
+  font-size: 0.875em;
+  margin-block-start: 2em;
+  font-weight: 675;
+  display: block;
+}
+@media screen and (max-width: 1199px) and (orientation: portrait) {
+  .logo.compact {
+    margin-block: 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 1em;
+    text-align: left;
+    align-items: center;
+  }
+  .logo.compact .logo__headline {
+    text-align: inherit;
+    font-size: 1.5em;
+  }
+  .logo.compact .logo__subheadline {
+    font-size: 0.85em;
+    grid-row: 2;
+    line-height: 1.25;
+  }
+  .logo.compact .logo__menu-button {
+    display: inline-flex !important;
+  }
+}
+@media screen and (max-width: 1199px) and (orientation: portrait) and (min-width: 720px) {
+  .logo.compact .logo__menu-button {
+    display: none;
+  }
+}
+@media screen and (max-width: 1199px) and (orientation: portrait) {
+  .logo.compact .logo__menu {
+    grid-column: 2/-1;
+    grid-row: 1/2;
+    margin: 0;
+    justify-content: flex-end;
+  }
+  .logo.compact .logo__menu[hidden] {
+    display: none;
+  }
+}
+@media screen and (max-width: 1199px) and (orientation: portrait) and (min-width: 720px) {
+  .logo.compact .logo__menu {
+    display: flex;
+  }
+}
+
+.pattern-list {
+  --gap: clamp(.5em, 2vw, 40px);
+  --columns: 3;
+  --column-gaps: calc(var(--gap) * (var(--columns) - 1) );
+  --vertical-offset: calc( ( ((100% - (var(--site-padding) * 2)) - var(--column-gaps) ) / var(--columns)) / 1.6 );
+  list-style: none;
+  margin-block-start: 0;
+  padding-inline-start: 0;
+  padding-block-start: var(--vertical-offset);
+  gap: var(--gap);
+  display: grid;
+  grid-template-columns: repeat(var(--columns), clamp(68px, (100% - var(--column-gaps)) / var(--columns), 202px));
+  justify-content: center;
+  transform: translateZ(0);
+  opacity: 1;
+  transition-property: transform, opacity, filter;
+  transition-duration: var(--base-animation-duration);
+  transition-timing-function: var(--base-easing);
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .pattern-list {
+    --columns: 4;
+    justify-content: end;
+    padding-inline-end: var(--gap);
+    padding-block-end: var(--gap);
+    margin-block-start: 2em;
+  }
+}
+.pattern-list__item {
+  margin: 0;
+}
+.pattern-list__item:hover {
+  --color-override: var(--color-highlight);
+}
+.pattern-list__item[aria-current] {
+  position: relative;
+  --color-override: var(--color-highlight);
+}
+.pattern-list__item[aria-current]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-override);
+  mix-blend-mode: screen;
+}
+@media screen and (max-width: 1199px) {
+  .pattern-list__item:nth-child(3n-1) {
+    transform: translateY(calc(-50% - calc(var(--gap)) / 2));
+  }
+}
+@media screen and (min-width: 1200px) {
+  .pattern-list__item:nth-child(even) {
+    transform: translateY(calc(-50% - calc(var(--gap)) / 2));
+  }
+}
+
+.updates-list {
+  padding-inline-start: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--site-padding);
+  margin-block-start: var(--site-padding) !important;
+}
+.updates-list__item {
+  font-size: 1em !important;
+}
+
+.pattern-entry {
+  display: flex;
+  flex-direction: column;
+  gap: var(--site-padding);
+  max-width: 640px;
+  margin: 0 auto;
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .pattern-entry {
+    background-color: #fff;
+    border-radius: 3px;
+    padding: clamp(.25em, 5%, .5em);
+    border: 2px solid var(--color-override, var(--color-primary));
+    transition-property: border-color;
+    transition-duration: var(--base-animation-duration);
+    transition-timing-function: var(--base-easing);
+    background-color: #fff;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.04), 0px 4px 6px rgba(0, 0, 0, 0.02), 0px 8px 25px rgba(0, 0, 0, 0.02);
+    padding: var(--site-padding);
+    border-radius: inherit;
+    border-end-start-radius: 1.5em;
+    border-end-end-radius: 1.5em;
+  }
+}
+.pattern-entry__pattern {
+  display: flex;
+  flex-direction: column;
+  gap: var(--site-padding);
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .pattern-entry__pattern {
+    flex-direction: column;
+    gap: calc(var(--site-padding) / 2);
+  }
+}
+.pattern-entry__pattern > .pattern {
+  margin-block-end: 0;
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .pattern-entry__pattern > .pattern {
+    width: 100%;
+  }
+}
+.pattern-entry__pattern-caption {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--site-padding) / 2);
+}
+.pattern-entry__title {
+  line-height: 1;
+  font-size: 1.5em;
+}
+@media screen and (min-width: 720px) {
+  .pattern-entry__title {
+    font-size: 1.75em;
+  }
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .pattern-entry__title {
+    font-size: 2em;
+  }
+}
+.pattern-entry__category-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+.pattern-entry__code {
+  overflow: auto;
+  font-size: 0.7em;
+  border-radius: 5px;
+  overflow: hidden;
+}
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .pattern-entry__code {
+    font-size: 0.85em;
+  }
+}
+.pattern-entry__code > pre {
+  margin: 0 !important;
+  padding: clamp(1em, 3vw, 2em) !important;
+}
+.pattern-entry__copy-button {
+  margin-inline-start: auto;
+}
+.pattern-entry__prev-next {
+  display: flex;
+  gap: var(--site-padding);
+}
+.pattern-entry__prev-next > * {
+  flex: 50%;
+  max-width: 50%;
+}
+.pattern-entry__prev-next > *:last-of-type {
+  text-align: end;
+  margin-inline-start: auto;
+}
+
+.footer {
+  text-align: center;
+}
+        </style>
+    </head>
+    <body class="social-image">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="0" height="0" style="contain: strict; position: absolute;">
+                <defs>
+                <symbol id="icon-arrow-down" viewBox="0 0 14 16">
+                    <path d="M7 1.00025L7 14.9997M7 14.9997L13 8.99972M7 14.9997L1 8.99972" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--icon-color, currentcolor)"></path>
+                </symbol><pattern id="pattern-1" patternUnits="userSpaceOnUse" width="4" height="4">
+    <path d="M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2" stroke="currentcolor" style="stroke: var(--pattern-channel-1, currentcolor)"></path>
+</pattern><pattern id="pattern-3" patternUnits="userSpaceOnUse" width="8" height="8">
+    <path d="M-1,1 l4,-4 M0,8 l8,-8 M6,10 l4,-4" stroke="currentcolor" style="stroke: var(--pattern-channel-1, currentcolor)"></path>
+</pattern><pattern id="pattern-2" patternUnits="userSpaceOnUse" width="4" height="4">
+    <path d="M0,0 l4,4
+             M-1,3 l2,2
+             M3,-1 l2,2" stroke="currentcolor" style="stroke: var(--pattern-channel-1, currentcolor)"></path>
+</pattern><pattern id="pattern-4" patternUnits="userSpaceOnUse" width="8" height="8">
+    <path d="M0,0 l8,8
+             M-1,7 l4,4
+             M7,-1 l4,4" stroke="currentcolor" style="stroke: var(--pattern-channel-1, currentcolor)"></path>
+</pattern><pattern id="pattern-5" patternUnits="userSpaceOnUse" width="6" height="6">
+    <path d="M-1,1 l2,-2
+             M0,6 l6,-6
+             M5,7 l2,-2" stroke="currentcolor" style="stroke: var(--pattern-channel-1, currentcolor)"></path>
+</pattern><pattern id="pattern-6" patternUnits="userSpaceOnUse" width="6" height="6">
+    <path d="M7,1 l-2,-2
+             M0,0 l6,6
+             M1,7 l-2,-2" stroke="currentcolor" style="stroke: var(--pattern-channel-1, currentcolor)"></path>
+</pattern><pattern id="pattern-7" patternUnits="userSpaceOnUse" width="6" height="6">
+    <path d="M0,0 l6,6
+             M6,0 l-6,6" stroke="currentcolor" style="stroke: var(--pattern-channel-1, currentcolor)"></path>
+</pattern><pattern id="pattern-8" patternUnits="userSpaceOnUse" width="8" height="8">
+    <path d="M0,0 l8,8
+             M8,0 l-8,8" stroke="currentcolor" style="stroke: var(--pattern-channel-1, currentcolor)"></path>
+</pattern><pattern id="pattern-9" patternUnits="userSpaceOnUse" width="12" height="12">
+    <path d="M0,0 l12,12
+             M12,0 l-12,12" stroke="currentcolor" style="stroke: var(--pattern-channel-1, currentcolor)"></path>
+</pattern><pattern id="pattern-11" patternUnits="userSpaceOnUse" width="6" height="6">
+    <path d="M3,0 l0,6
+             M0,3 l6,0" stroke="currentcolor" style="stroke: var(--pattern-channel-1, currentcolor)"></path>
+</pattern><pattern id="pattern-10" patternUnits="userSpaceOnUse" width="4" height="4">
+    <path d="M2,0 l0,4
+             M0,2 l4,0" stroke="currentcolor" style="stroke: var(--pattern-channel-1, currentcolor)"></path>
+</pattern><pattern id="pattern-12" patternUnits="userSpaceOnUse" width="8" height="8">
+    <path d="M4,0 l0,8
+             M0,4 l8,0" stroke="currentcolor" style="stroke: var(--pattern-channel-1, currentcolor)"></path>
+</pattern><pattern id="pattern-13" patternUnits="userSpaceOnUse" width="12" height="12">
+    <path d="M6,0 l0,12
+             M0,6 l12,0" stroke="currentcolor" style="stroke: var(--pattern-channel-1, currentcolor)"></path>
+</pattern><pattern id="pattern-14" patternUnits="userSpaceOnUse" width="6" height="6">
+    <path d="M-1,5 l2,2 M5,7 l2,-2" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></path>
+    <polyline points="0,0 3,3 6,0" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></polyline>
+</pattern><pattern id="pattern-15" patternUnits="userSpaceOnUse" width="8" height="8">
+    <path d="M-1,7 l2,2 M7,9 l2,-2" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></path>
+    <polyline points="0,0 4,4 8,0" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></polyline>
+</pattern><pattern id="pattern-16" patternUnits="userSpaceOnUse" width="12" height="12">
+    <path d="M-1,11 l2,2 M11,13 l2,-2" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></path>
+    <polyline points="0,0 6,6 12,0" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></polyline>
+</pattern><pattern id="pattern-17" patternUnits="userSpaceOnUse" width="8" height="8">
+    <circle cx="4" cy="4" r="2" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></circle>
+</pattern><pattern id="pattern-18" patternUnits="userSpaceOnUse" width="12" height="12">
+    <circle cx="6" cy="6" r="3" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></circle>
+</pattern><pattern id="pattern-19" patternUnits="userSpaceOnUse" width="16" height="16">
+    <circle cx="8" cy="8" r="4" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></circle>
+</pattern><pattern id="pattern-20" patternUnits="userSpaceOnUse" width="12" height="12">
+    <circle cx="0" cy="6" r="2" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></circle>
+    <circle cx="12" cy="6" r="2" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></circle>
+    <circle cx="6" cy="0" r="2" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></circle>
+    <circle cx="6" cy="12" r="2" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></circle>
+</pattern><pattern id="pattern-21" patternUnits="userSpaceOnUse" width="16" height="16">
+    <circle cx="0" cy="8" r="3" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></circle>
+    <circle cx="16" cy="8" r="3" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></circle>
+    <circle cx="8" cy="0" r="3" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></circle>
+    <circle cx="8" cy="16" r="3" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></circle>
+</pattern><pattern id="pattern-22" patternUnits="userSpaceOnUse" width="24" height="24">
+    <circle cx="0" cy="12" r="4" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></circle>
+    <circle cx="24" cy="12" r="4" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></circle>
+    <circle cx="12" cy="0" r="4" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></circle>
+    <circle cx="12" cy="24" r="4" style="stroke: var(--pattern-channel-1, currentcolor)" fill="none"></circle>
+</pattern></defs>
+            </svg>
+        <header class="social-image__header">
+            <figure class="logo">
+                <h1 class="logo__headline">Basic Pattern<br>Repository</h1>
+                <figcaption class="logo__subheadline">just SVG - for your delight!</figcaption>
+            </figure>
+        </header>
+        <main class="social-image__body">
+        <ul class="pattern-list" role="list"><li class="pattern-list__item  pattern" id="pattern-1" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-1)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/1/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 1</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-2" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-2)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/2/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 2</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-3" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-3)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/3/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 3</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-4" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-4)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/4/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 4</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-5" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-5)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/5/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 5</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-6" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-6)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/6/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 6</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-7" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-7)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/7/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 7</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-8" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-8)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/8/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 8</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-9" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-9)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/9/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 9</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-10" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-10)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/10/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 10</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-11" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-11)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/11/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 11</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-12" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-12)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/12/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 12</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-13" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-13)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/13/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 13</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-14" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-14)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/14/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 14</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-15" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-15)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/15/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 15</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-16" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-16)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/16/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 16</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-17" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-17)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/17/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 17</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-18" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-18)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/18/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 18</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-19" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-19)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/19/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 19</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-20" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-20)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/20/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 20</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-21" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-21)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/21/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 21</span>
+            </a>
+        </li><li class="pattern-list__item  pattern" id="pattern-22" data-pattern-item="">
+            <svg class="pattern__svg" viewBox="0 0 182 182" data-pattern-svg="" width="182" height="182">
+                <rect width="182" height="182" fill="url(#pattern-22)" data-pattern-shape=""></rect>
+            </svg>
+            <a class="pattern__link" href="/pattern/22/">
+                <span class="icon">
+                    <svg width="14" height="16">
+                        <use xlink:href="#icon-arrow-down"></use>
+                    </svg>
+                </span>
+                <span class="sr-only">Details for Pattern 22</span>
+            </a>
+        </li></ul>
+        </main>
+    </body>
+</html>

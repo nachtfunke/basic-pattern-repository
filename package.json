@@ -11,14 +11,16 @@
     "sass:watch": "sass src/_scss:dist/css --watch --update --color",
     "sass:build": "sass src/_scss:dist/css --no-source-map --style=compressed",
     "subset-font": "./build_tasks/subset-font.sh",
+    "social-images:build": "./build_tasks/build-social-images.sh",
     "clean": "del dist",
     "start": "run-p -l clean sass:build sass:watch eleventy:serve",
-    "build": "run-s -l clean eleventy:build sass:build",
+    "build": "run-s -l clean eleventy:build sass:build social-images:build",
     "test": "npm run eleventy:test"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.6",
+    "@11tyrocks/eleventy-plugin-social-images": "^0.2.0",
     "del": "^2.2.2",
     "del-cli": "^3.0.1",
     "eleventy-plugin-svg-contents": "^0.7.0",
