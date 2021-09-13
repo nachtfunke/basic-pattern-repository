@@ -3,18 +3,20 @@
     <p class="logo__headline"><a href="{{ '/' | url }}">Basic Pattern
 Repository</a></p>
     <figcaption class="logo__subheadline">just SVG - for your delight!</figcaption>
-    <button class="button  logo__menu-button" type="button" aria-expanded="false" data-open-mobile-nav>open menu</button>
-    <nav class="logo__menu  mobile-navigation" aria-labelledby="mobile-nav-label" hidden data-mobile-nav>
-        <p class="sr-only" id="mobile-nav-label">Navigation</p>
-        <button class="button  mobile-navigation__close-button" type="button" data-close-mobile-nav>close menu</button>
-        <ul class="menu mobile-navigation__menu" role="list">
-            {%- for key, item in params.menu -%}
-                <li class="menu__item">
-                    {%- set isCurrent = params.page.url == ( item.url + '/' ) -%}
-                    <a href="{{ item.url | url }}" {% if isCurrent %}aria-current="page"{% endif %} >{{ item.label }}{{ '↗' if item.external }}</a>
-                </li>
-            {%- endfor -%}
-        </ul>
-    </nav>
+    {%- if params.menu -%}
+        <button class="button  logo__menu-button" type="button" aria-expanded="false" data-open-mobile-nav>open menu</button>
+        <nav class="logo__menu  mobile-navigation" aria-labelledby="mobile-nav-label" hidden data-mobile-nav>
+            <p class="sr-only" id="mobile-nav-label">Navigation</p>
+            <button class="button  mobile-navigation__close-button" type="button" data-close-mobile-nav>close menu</button>
+            <ul class="menu mobile-navigation__menu" role="list">
+                {%- for key, item in params.menu -%}
+                    <li class="menu__item">
+                        {%- set isCurrent = params.page.url == ( item.url + '/' ) -%}
+                        <a href="{{ item.url | url }}" {% if isCurrent %}aria-current="page"{% endif %} >{{ item.label }}{{ '↗' if item.external }}</a>
+                    </li>
+                {%- endfor -%}
+            </ul>
+        </nav>
+    {%- endif -%}
 </figure>
 {%- endmacro -%}

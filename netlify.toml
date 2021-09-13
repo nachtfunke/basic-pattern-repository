@@ -2,6 +2,6 @@
   command = "npm run start"
 
 [build]
-  command = "npm run build"
+  command = "AWS_LAMBDA_FUNCTION_NAME=trickpuppeteer npm run build"
   functions = "netlify/functions"
   publish = "dist"

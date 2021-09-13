@@ -1,0 +1,116 @@
+[
+    {
+        "imgName": "default",
+        "title": "Basic Pattern Repository"
+    },
+        {
+            "imgName": "pattern-1",
+            "title": "Pattern #1",
+            "patternId": "1"
+        },
+        {
+            "imgName": "pattern-3",
+            "title": "Pattern #3",
+            "patternId": "3"
+        },
+        {
+            "imgName": "pattern-2",
+            "title": "Pattern #2",
+            "patternId": "2"
+        },
+        {
+            "imgName": "pattern-4",
+            "title": "Pattern #4",
+            "patternId": "4"
+        },
+        {
+            "imgName": "pattern-5",
+            "title": "Pattern #5",
+            "patternId": "5"
+        },
+        {
+            "imgName": "pattern-6",
+            "title": "Pattern #6",
+            "patternId": "6"
+        },
+        {
+            "imgName": "pattern-7",
+            "title": "Pattern #7",
+            "patternId": "7"
+        },
+        {
+            "imgName": "pattern-8",
+            "title": "Pattern #8",
+            "patternId": "8"
+        },
+        {
+            "imgName": "pattern-9",
+            "title": "Pattern #9",
+            "patternId": "9"
+        },
+        {
+            "imgName": "pattern-11",
+            "title": "Pattern #11",
+            "patternId": "11"
+        },
+        {
+            "imgName": "pattern-10",
+            "title": "Pattern #10",
+            "patternId": "10"
+        },
+        {
+            "imgName": "pattern-12",
+            "title": "Pattern #12",
+            "patternId": "12"
+        },
+        {
+            "imgName": "pattern-13",
+            "title": "Pattern #13",
+            "patternId": "13"
+        },
+        {
+            "imgName": "pattern-14",
+            "title": "Pattern #14",
+            "patternId": "14"
+        },
+        {
+            "imgName": "pattern-15",
+            "title": "Pattern #15",
+            "patternId": "15"
+        },
+        {
+            "imgName": "pattern-16",
+            "title": "Pattern #16",
+            "patternId": "16"
+        },
+        {
+            "imgName": "pattern-17",
+            "title": "Pattern #17",
+            "patternId": "17"
+        },
+        {
+            "imgName": "pattern-18",
+            "title": "Pattern #18",
+            "patternId": "18"
+        },
+        {
+            "imgName": "pattern-19",
+            "title": "Pattern #19",
+            "patternId": "19"
+        },
+        {
+            "imgName": "pattern-20",
+            "title": "Pattern #20",
+            "patternId": "20"
+        },
+        {
+            "imgName": "pattern-21",
+            "title": "Pattern #21",
+            "patternId": "21"
+        },
+        {
+            "imgName": "pattern-22",
+            "title": "Pattern #22",
+            "patternId": "22"
+        }
+]
