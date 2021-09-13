@@ -1,0 +1,12 @@
+---
+permalink: '/svg/patterns.svg'
+---
+{%- set totalHeight = 24 * (collections.pattern | length) -%}
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 {{ totalHeight }}" xml:space="preserve">
+    <defs>{%- for pattern in collections.pattern -%}{{ pattern.templateContent | safe }}{%- endfor -%}</defs>
+    {%- for pattern in collections.pattern -%}
+        {%- set positionY = 24 * (pattern.data.id - 1) -%}
+        <view id="view-pattern-{{ pattern.data.id }}" viewBox="0 {{ positionY }} 24 24" />
+        <rect x="0" y="{{ positionY }}" width="24" height="24" fill="url(#pattern-{{ pattern.data.id }})" />
+    {%- endfor -%}
+</svg>

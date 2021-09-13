@@ -17,7 +17,7 @@
     }
 }
 
-@mixin _contentBackground() {
+@mixin contentBackground() {
     background-color: #fff;
     border-radius: 1.5em;
     box-shadow: 0 0 0 2px var(--color-primary);
@@ -69,7 +69,7 @@
     }
 
     &__content {
-        @include _contentBackground();
+        @include contentBackground();
         padding: var(--site-padding);
         transition-property: transform, opacity;
         transition-duration: var(--base-animation-duration);
@@ -98,7 +98,7 @@
         }
 
         &::after {
-            @include _contentBackground();
+            @include contentBackground();
             content: '';
             position: absolute;
             height: calc(100% - 12vh);
@@ -288,13 +288,6 @@
                 transform: translateZ(-100px);
                 opacity: .5;
                 filter: blur(10px);
-            }
-        }
-
-        #{$p} {
-            &__patterns {
-            }
-            &__content {
             }
         }
     }

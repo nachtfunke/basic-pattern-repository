@@ -6,13 +6,6 @@ highlightSyntax: true
 ---
 {%- set previousPattern = collections.orderedPatterns | getPreviousCollectionItem(page) -%}
 {%- set nextPattern = collections.orderedPatterns | getNextCollectionItem(page) -%}
-<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="0" height="0" style="contain: strict; position: absolute;">
-    <defs>
-        {{ content | safe }}
-        {{ previousPattern.templateContent | safe }}
-        {{ nextPattern.templateContent | safe }}
-    </defs>
-</svg>
 <noscript>
     <a class="button  site__browse-button" href="{{ '/' | url }}"><span aria-hidden="true">←</span> Browse Patterns</a>
 </noscript>

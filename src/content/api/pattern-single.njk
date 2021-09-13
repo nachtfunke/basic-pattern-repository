@@ -1,0 +1,17 @@
+---
+pagination:
+    data: collections.pattern
+    size: 1
+    alias: pattern
+permalink: '/api/pattern/{{pattern.data.id}}.json'
+---
+{
+    "id": {{ pattern.data.id }},
+    "url": "https://patterns.helloyes.dev{{ pattern.url | url }}",
+    "categories": "{{ pattern.data.categories }}",
+    "svg": "https://patterns.helloyes.dev/svg/pattern-{{ pattern.data.id }}.svg",
+    "source": {
+        "person": "{{ pattern.data.source.person or 'Basic Pattern Repository' }}",
+        "url": "{{ pattern.data.source.cite or 'https://patterns.helloyes.dev' }}"
+    }
+}

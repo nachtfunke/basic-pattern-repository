@@ -1,0 +1,24 @@
+---
+pagination:
+    data: collections.pattern
+    size: 1
+    alias: pattern
+permalink: '/assets/favicons/{{ pattern.data.id }}.svg'
+---
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12" viewBox="0 0 12 12" xml:space="preserve">
+    <style>
+        :root {
+            --pattern-channel-1: #4B3339;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --pattern-channel-1: #F5F294;
+            }
+        }
+    </style>
+    <defs>
+        {{ pattern.templateContent | safe }}
+    </defs>
+    <rect x="0" y="0" width="12" height="12" fill="url(#pattern-{{ pattern.data.id }})" />
+</svg>
