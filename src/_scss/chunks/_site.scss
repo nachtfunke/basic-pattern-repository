@@ -43,6 +43,7 @@
         text-transform: uppercase;
         font-feature-settings: 'c2sc', 'smcp';
         font-weight: 625;
+        grid-column: 1 / -1;
         
         &:focus {
             color: var(--color-highlight);
@@ -243,6 +244,9 @@
                 border-end-start-radius: 0;
                 position: relative;
                 flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
 
                 @include widerThanLayoutBreak() {
                     grid-column: patterns-start / patterns-end;
@@ -254,7 +258,6 @@
                     height: 100%;
                     overflow-y: auto;
                     padding: calc(var(--site-padding) * 2);
-
                 }
 
                 &::after {

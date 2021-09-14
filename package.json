@@ -1,6 +1,6 @@
 {
   "name": "basic-pattern-repository",
-  "version": "0.1.0",
+  "version": "0.4.1",
   "description": "",
   "author": "Thomas Michael Semmler",
   "main": ".eleventy.js",

@@ -33,7 +33,10 @@ highlightSyntax: true
                     {{ content | safe }}
                 {%- endhighlight -%}
             </div>
-            <button class="button  pattern-entry__copy-button" type="button" data-copy-pattern-code>copy code</button>
+            <div class="pattern-entry__copy-button">
+                <a class="button" href="{{ '/svg/pattern/'+id+'.svg' }}" download>download file</a>
+                <button class="button" type="button" data-copy-pattern-code>copy code</button>
+            </div>
         </figcaption>
     </figure>
     <nav class="pattern-entry__prev-next">

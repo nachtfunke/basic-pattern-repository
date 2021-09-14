@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--site-padding);
-    max-width: 640px;
+    max-width: min(100%, 640px);
     margin: 0 auto;
 
     @include widerThanLayoutBreak() {
