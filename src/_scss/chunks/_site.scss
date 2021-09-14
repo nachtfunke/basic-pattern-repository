@@ -43,6 +43,7 @@
         text-transform: uppercase;
         font-feature-settings: 'c2sc', 'smcp';
         font-weight: 625;
+        grid-column: 1 / -1;
         
         &:focus {
             color: var(--color-highlight);
