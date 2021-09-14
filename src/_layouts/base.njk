@@ -7,9 +7,9 @@
         <meta name="description" content="A collection of hand-coded SVG <pattern>'s, ready to be used in inline SVG or however you like.">
         <meta name="viewport" content="width=device-width">
         {%- if socialImage %}
-            {%- set socialImageUrl = meta.domain+"/previews/"+socialImage+".png" %}
+            {%- set socialImageUrl = meta.site.domain+"/previews/"+socialImage+".png" %}
         {%- else %}
-            {%- set socialImageUrl = meta.domain+"/previews/default.png" %}
+            {%- set socialImageUrl = meta.site.domain+"/previews/default.png" %}
         {% endif -%}
         <meta property="og:image" content="{{ socialImageUrl }}">
         <meta property="twitter:image" content="{{ socialImageUrl }}">
