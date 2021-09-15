@@ -21,6 +21,11 @@
             align-items: center;
             padding: calc(var(--site-padding) * 2) var(--site-padding);
 
+            @supports not (inset-inline: 0) {
+                top: 0;
+                left: 0;
+            }
+
             &::before {
                 content: '';
                 position: absolute;

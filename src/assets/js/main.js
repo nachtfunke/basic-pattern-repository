@@ -62,7 +62,7 @@ if (browseButton) {
                 e.stopPropagation();
                 siteContent.hidden = true;
                 siteContent.setAttribute('aria-hidden', true);
-                siteContent.setAttribute('style', 'z-index: -1');
+                siteContent.setAttribute('style', 'z-index: -1; display: none;');
                 sitePatterns.setAttribute('style', 'display: block');
                 sitePatterns.querySelector('a:first-of-type').focus();
                 resizePatterns();

@@ -2,7 +2,7 @@
 @use 'site' as site;
 
 .pattern-list {
-    --gap: clamp(.5em, 2vw, 40px);
+    --gap: clamp(.5em, 1.25vw, 1.5em);
     --columns: 3;
     --column-gaps: calc(var(--gap) * (var(--columns) - 1) );
     --vertical-offset: calc( ( ((100% - (var(--site-padding) * 2)) - var(--column-gaps) ) / var(--columns)) / 1.6 );

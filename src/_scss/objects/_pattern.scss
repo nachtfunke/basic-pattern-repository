@@ -29,6 +29,11 @@
             position: absolute;
             inset-block-end: 1em;
             inset-inline-end: 1em;
+
+            @supports not (inset-inline: 0) {
+                bottom: 1em;
+                right: 1em;
+            }
         }
 
         &::before {
