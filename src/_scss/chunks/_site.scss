@@ -88,7 +88,9 @@
     }
 
     &__patterns {
-        padding-inline: var(--site-padding);
+        padding-inline: var(--site-padding); // Doesn't work in safari
+        padding-inline-start: var(--site-padding);
+        padding-inline-end: var(--site-padding);
         position: relative;
         padding-block-end: var(--site-padding);
         perspective: 700px;
@@ -100,9 +102,10 @@
 
         &::after {
             @include contentBackground();
+            --offset: clamp(70px, 20vw, 202px);
             content: '';
             position: absolute;
-            height: calc(100% - 12vh);
+            height: calc(100% - var(--offset));
             bottom: 0;
             left: 0;
             right: 0;
@@ -119,6 +122,12 @@
             padding-inline: 0;
             height: 100%;
             overflow-y: auto;
+
+            @supports not (padding-inline: 0) {
+                padding-inline-start: var(--site-padding);
+                padding-inline-end: var(--site-padding);
+            }
+    
         }
     }
 
@@ -202,6 +211,11 @@
                     height: 2px;
                     background-color: #fff;
 
+                    @supports not (inset-inline: 0) {
+                        bottom: -2px;
+                        left: 0;
+                    }
+
                     @include widerThanLayoutBreak() {
                         content: none;
                     }
@@ -268,6 +282,11 @@
                     inset-inline: 0;
                     height: 2px;
                     background-color: #fff;
+
+                    @supports not (inset-inline: 0) {
+                        bottom: -2px;
+                        left: 0;
+                    }
 
                     @include widerThanLayoutBreak() {
                         content: none;
