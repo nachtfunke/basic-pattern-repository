@@ -12,8 +12,18 @@ export const recalculatePatternDimensions = _entry => {
     const shape = svg.querySelector('[data-pattern-shape]');
     const width = _entry.offsetWidth;
     const height = _entry.offsetHeight;
-    const padding = parseInt(window.getComputedStyle(_entry, null).getPropertyValue('padding'));
-    const border = parseInt(window.getComputedStyle(_entry, null).getPropertyValue('border'));
+    let padding = parseInt(window.getComputedStyle(_entry, null).getPropertyValue('padding'));
+    let border = parseInt(window.getComputedStyle(_entry, null).getPropertyValue('border'));
+
+    // Cannot get values from shorthand property in firefox.
+    if ( isNaN(padding) ) {
+        padding = parseInt(window.getComputedStyle(_entry, null).getPropertyValue('padding-top'));
+    }
+
+    if ( isNaN(border) ) {
+        border = parseInt(window.getComputedStyle(_entry, null).getPropertyValue('border-top-width'));
+    }
+
     const newWidth = width - (border * 2) - (padding * 2);
     const newHeight = height - (border * 2) - (padding * 2);
     
