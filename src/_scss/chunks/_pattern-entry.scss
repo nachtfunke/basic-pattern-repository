@@ -94,9 +94,13 @@
             flex: 50%;
             max-width: 50%;
 
-            &:last-of-type {
-                text-align: end;
+            &.vers--next {
                 margin-inline-start: auto;
+                text-align: end;
+            }
+        
+            &.vers--previous {
+                margin-inline-end: auto;
             }
         }
     }
