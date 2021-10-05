@@ -69,21 +69,6 @@
             "patternId": "13"
         },
         {
-            "imgName": "pattern-14",
-            "title": "Pattern #14",
-            "patternId": "14"
-        },
-        {
-            "imgName": "pattern-15",
-            "title": "Pattern #15",
-            "patternId": "15"
-        },
-        {
-            "imgName": "pattern-16",
-            "title": "Pattern #16",
-            "patternId": "16"
-        },
-        {
             "imgName": "pattern-17",
             "title": "Pattern #17",
             "patternId": "17"
@@ -112,6 +97,21 @@
             "imgName": "pattern-22",
             "title": "Pattern #22",
             "patternId": "22"
+        },
+        {
+            "imgName": "pattern-14",
+            "title": "Pattern #14",
+            "patternId": "14"
+        },
+        {
+            "imgName": "pattern-15",
+            "title": "Pattern #15",
+            "patternId": "15"
+        },
+        {
+            "imgName": "pattern-16",
+            "title": "Pattern #16",
+            "patternId": "16"
         },
         {
             "imgName": "pattern-23",
