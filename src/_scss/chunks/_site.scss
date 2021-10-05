@@ -159,6 +159,10 @@
         }
 
         #{$p} {
+            &__header {
+                padding-block-end: var(--site-padding);
+            }
+
             &__content {
                 position: relative;
                 flex: 1;
