@@ -14,7 +14,7 @@
         <meta property="og:image" content="{{ socialImageUrl }}">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@nachtfunke">
-        <meta name="twitter:title" content="{{ title }}">
+        <meta name="twitter:title" content="{{ title + ' - ' + meta.site.title if title else meta.site.title }}">
         <meta property="twitter:image" content="{{ socialImageUrl }}">
         <meta property="twitter:image:alt" content="Preview of: {{ title + ' - ' + meta.site.title if title else meta.site.title }}">
         <title>{{ title + ' - ' + meta.site.title if title else meta.site.title }}</title>
