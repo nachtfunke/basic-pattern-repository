@@ -1,0 +1,8 @@
+---
+layout: base
+---
+{% from 'macros/pattern-list.macro.njk' import patternList %}
+<section class="site__pinboard">{{ content | safe }}</section>
+<main class="site__patterns" id="content" data-site-content>
+    {{ patternList({ patterns: collections.orderedPatterns, url: page.url }) }}
+</main> 

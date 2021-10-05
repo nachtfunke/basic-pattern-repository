@@ -1,7 +1,7 @@
 ---
 layout: base
 ---
-{% from 'partials/pattern-list.macro.njk' import patternList %}
+{% from 'macros/pattern-list.macro.njk' import patternList %}
 {% if content %}
     <main class="site__content" id="content" data-site-content>
         {{ content | safe }}

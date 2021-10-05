@@ -30,7 +30,7 @@
         display: grid;
         gap: var(--site-padding);
         grid-template-columns: [side-start] 1fr [side-end patterns-start] minmax(auto, 42%) [patterns-end];
-        grid-template-rows: [skip] auto [skip-end header-start] 1fr [header-end footer-start] auto [footer-end];
+        grid-template-rows: [skip] auto [skip-end header-start] 1fr [header-end pinboard-start] auto [pinboard-end footer-start] auto [footer-end];
         height: 100%;
         overflow-y: hidden;
     }
@@ -58,6 +58,7 @@
     &__header {
         padding: var(--site-padding);
         padding-block-end: 0;
+        overflow: auto;
 
         @include widerThanLayoutBreak() {
             grid-column: side-start / side-end;
@@ -66,6 +67,15 @@
             flex-direction: column;
             place-content: center;
             height: 100%;
+        }
+    }
+
+    &__pinboard {
+        padding: var(--site-padding);
+
+        @include widerThanLayoutBreak() {
+            padding: 0;
+            grid-row: pinboard-start / pinboard-end;
         }
     }
 
@@ -118,7 +128,7 @@
 
         @include widerThanLayoutBreak() {
             grid-column: patterns-start / patterns-end;
-            grid-row: header-start / footer-end;
+            grid-row: 1/ -1;
             padding-inline: 0;
             height: 100%;
             overflow-y: auto;
@@ -146,14 +156,9 @@
 
         @include widerThanLayoutBreak() {
             display: grid;
-            gap: 0;
         }
 
         #{$p} {
-            &__header {
-                padding: var(--site-padding);
-            }
-            
             &__content {
                 position: relative;
                 flex: 1;
@@ -194,11 +199,13 @@
 
                 @include widerThanLayoutBreak() {
                     grid-column: patterns-start / patterns-end;
-                    grid-row: header-start / footer-end;
+                    grid-row: 1/ -1;
                     z-index: 1;
                     height: 100%;
                     overflow-y: auto;
                     padding: calc(var(--site-padding) * 2);
+                    border-start-end-radius: 0;
+                    border-end-end-radius: 0;
 
                 }
 

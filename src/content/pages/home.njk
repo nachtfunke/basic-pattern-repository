@@ -1,4 +1,10 @@
 ---
-layout: 'pattern-pages'
+layout: 'home'
 permalink: 'index.html'
 ---
+{%- set update = collections.update | last -%}
+<article class="pin">
+    <h2 class="pin__name">Latest Update</h2>
+    <p class="pin__version">{{ update.data.title }}</p>
+    <a class="pin__link" href="{{ '/updates' | url }}">read more</a>
+</article>
