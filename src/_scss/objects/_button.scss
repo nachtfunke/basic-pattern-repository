@@ -21,6 +21,7 @@
     &:is(:hover, :focus) {
         cursor: pointer;
         color: var(--color-highlight);
+        transform: translateY(1px);
     }
 
     &:active {
