@@ -5,20 +5,22 @@ pagination:
     alias: pattern
 permalink: '/assets/favicons/{{ pattern.data.id }}.svg'
 ---
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12" viewBox="0 0 12 12" xml:space="preserve">
+{%- set size -%}
+    {%- if pattern.data.size <= 12 -%}
+        {{ pattern.data.size * 3 }}
+    {%- else -%}
+        {{ pattern.data.size }}
+    {%- endif -%}
+{%- endset -%}
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ pattern.data.size * 3 }}" height="{{ size }}" viewBox="0 0 {{ size }} {{ size }}" xml:space="preserve">
     <style>
         :root {
             --pattern-channel-1: #4B3339;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --pattern-channel-1: #F5F294;
-            }
         }
     </style>
     <defs>
         {{ pattern.templateContent | safe }}
     </defs>
-    <rect x="0" y="0" width="12" height="12" fill="url(#pattern-{{ pattern.data.id }})" />
+    <rect x="0" y="0" rx="3" ry="3" width="{{ size }}" height="{{ size }}" stroke-width="2" stroke="#4B3339" fill="#F5F294" />
+    <rect x="2" y="2" width="{{ size - 4 }}" height="{{ size - 4 }}" fill="url(#pattern-{{ pattern.data.id }})" />
 </svg>

@@ -1,0 +1,60 @@
+@use 'site' as site;
+@use '../objects/sr-only';
+
+.pin {
+    padding: 1em;
+    border-radius: 3px;
+    background-color: hsl(var(--color-hs-primary) 25% / 5%);
+    border: 1px solid hsl(var(--color-hs-primary) 25% / 10%);
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+
+    &:is(:hover, :focus) {
+        color: var(--color-highlight);
+    }
+
+    @include site.widerThanLayoutBreak() {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+    }
+
+    &__version {
+        order: 1;
+        line-height: 1;
+        font-size: .875em;
+    }
+
+    &__name {
+        order: 2;
+        line-height: 1;
+        font-size: .875em;
+    }
+
+    &__link {
+        order: 3;
+    }
+
+    &__link {
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: .875em;
+        line-height: 1;
+        
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+        }
+        
+        @media (hover: hover) {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+        }
+    }
+}
